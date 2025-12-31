@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruota della Fortuna - Web Game</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="home-screen" class="screen">
+        <div class="logo-large">RUOTA DELLA FORTUNA</div>
+        <div class="menu-box">
+            <h2>Scegli il Livello</h2>
+            <div class="level-buttons">
+                <button onclick="startGame(0)">LIVELLO 1: FACILE</button>
+                <button onclick="startGame(1)">LIVELLO 2: PROVERBIO</button>
+                <button onclick="startGame(2)">LIVELLO 3: CINEMA</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
+        <div class="header-game">
+            <button class="back-btn" onclick="showHome()">← Menu</button>
+            <h2 id="categoryDisplay">CATEGORIA: ---</h2>
+        </div>
+
+        <div id="board" class="board">
+            <div class="row r1" id="row-1"></div>
+            <div class="row r2" id="row-2"></div>
+            <div class="row r3" id="row-3"></div>
+            <div class="row r4" id="row-4"></div>
+        </div>
+
+        <div id="keyboard" class="keyboard"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
