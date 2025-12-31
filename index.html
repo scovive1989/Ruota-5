@@ -2,40 +2,38 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
     <title>Ruota della Fortuna Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <div id="home-screen" class="screen menu-bg">
-    <img src="logo.png" alt="La Ruota della Fortuna" class="menu-logo">
-    
-    <div class="search-container">
-        <input type="text" placeholder="CERCA CATEGORIA..." id="searchInput">
+        <img src="logo.png" alt="La Ruota della Fortuna" class="menu-logo">
+        <div class="search-container">
+            <input type="text" placeholder="CERCA CATEGORIA..." id="searchInput">
+        </div>
+        <div id="levels-list" class="levels-list"></div>
     </div>
-    <div id="levels-list" class="levels-list"></div>
-</div>
-
 
     <div id="game-screen" class="screen hidden game-bg">
-    <div class="game-header">
-        <button class="back-btn" onclick="location.reload()">← MENU</button>
-        <button class="solve-btn" onclick="revealSolution()">SOLUZIONE</button>
+        <div class="game-header">
+            <button class="back-btn" onclick="location.reload()">← MENU</button>
+            <button class="solve-btn" onclick="revealSolution()">SOLUZIONE</button>
+        </div>
+
+        <div class="board-main-wrapper">
+            <table class="wheel-table">
+                <tr id="row-1"></tr>
+                <tr id="row-2"></tr>
+                <tr id="row-3"></tr>
+                <tr id="row-4"></tr>
+            </table>
+        </div>
+
+        <div id="categoryDisplay" class="category-tag">CATEGORIA</div>
+
+        <div id="keyboard" class="keyboard"></div>
     </div>
-
-    <div class="board-main-wrapper">
-        <table class="wheel-table">
-            <tr id="row-1"></tr>
-            <tr id="row-2"></tr>
-            <tr id="row-3"></tr>
-            <tr id="row-4"></tr>
-        </table>
-    </div>
-
-    <div id="categoryDisplay" class="category-tag">CATEGORIA</div>
-
-    <div id="keyboard" class="keyboard"></div>
-</div>
 
     <script src="script.js"></script>
 </body>
