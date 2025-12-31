@@ -11,11 +11,7 @@ const livelli = [
 const rowCaps = [12, 14, 14, 12];
 
 function init() {
-    const list = document.getElementById('levels-list');
-    if(!list) return;
-    
     renderLevels(livelli);
-
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.addEventListener('input', (e) => {
@@ -31,11 +27,10 @@ function renderLevels(dataArray) {
     if (!list) return;
     list.innerHTML = '';
     dataArray.forEach((liv) => {
-        const originalIndex = livelli.findIndex(l => l.id === liv.id);
         const btn = document.createElement('button');
         btn.className = 'level-btn';
         btn.innerText = `LIV. ${liv.id}: ${liv.categoria}`;
-        btn.onclick = () => startGame(originalIndex);
+        btn.onclick = () => startGame(livelli.findIndex(l => l.id === liv.id));
         list.appendChild(btn);
     });
 }
@@ -47,18 +42,6 @@ function startGame(idx) {
     document.getElementById('categoryDisplay').innerText = data.categoria;
     setupBoard(data.frase);
     setupKeyboard();
-}
-
-function revealSolution() {
-    if(!confirm("Vuoi visualizzare la soluzione completa?")) return;
-    document.querySelectorAll('.tile.active').forEach(tile => {
-        const letter = tile.dataset.letter;
-        if (letter) {
-            tile.innerText = letter;
-            tile.style.backgroundColor = "white";
-        }
-    });
-    document.querySelectorAll('.key').forEach(k => k.disabled = true);
 }
 
 function setupBoard(frase) {
@@ -76,17 +59,16 @@ function setupBoard(frase) {
     });
 
     let usedRows = rowsData.filter(r => r.length > 0).length;
-    let startAt = usedRows <= 2 ? 1 : 0;
+    let startAt = usedRows === 1 ? 1 : (usedRows === 2 ? 1 : 0);
+    let finalRows = [[], [], [], []];
+    let targetRow = startAt;
+    rowsData.filter(r => r.length > 0).forEach(data => {
+        if (targetRow < 4) finalRows[targetRow++] = data;
+    });
 
     for (let i = 0; i < 4; i++) {
         const tr = document.getElementById(`row-${i+1}`);
         tr.innerHTML = '';
-        const finalRows = [[], [], [], []];
-        let targetRow = startAt;
-        rowsData.filter(r => r.length > 0).forEach(data => {
-            if (targetRow < 4) finalRows[targetRow++] = data;
-        });
-
         const txt = finalRows[i].join(' ');
         const pad = Math.floor((rowCaps[i] - txt.length) / 2);
         
@@ -117,13 +99,27 @@ function setupKeyboard() {
         b.innerText = l;
         b.onclick = () => {
             b.disabled = true;
-            document.querySelectorAll(`.tile[data-letter="${l}"]`).forEach(t => {
-                t.innerText = l;
-                t.style.backgroundColor = "white";
-            });
+            revealLetter(l);
         };
         kb.appendChild(b);
     });
+}
+
+function revealLetter(l) {
+    const targets = document.querySelectorAll(`.tile[data-letter="${l}"]`);
+    targets.forEach(t => {
+        t.innerText = l;
+        t.style.backgroundColor = "white";
+    });
+}
+
+function revealSolution() {
+    if(!confirm("Vuoi visualizzare la soluzione completa?")) return;
+    document.querySelectorAll('.tile.active').forEach(t => {
+        t.innerText = t.dataset.letter;
+        t.style.backgroundColor = "white";
+    });
+    document.querySelectorAll('.key').forEach(k => k.disabled = true);
 }
 
 window.onload = init;
