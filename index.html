@@ -2,39 +2,40 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruota della Fortuna - Web Game</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Ruota della Fortuna Pro</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div id="home-screen" class="screen menu-bg">
+    <img src="logo.png" alt="La Ruota della Fortuna" class="menu-logo">
+    
+    <div class="search-container">
+        <input type="text" placeholder="CERCA CATEGORIA..." id="searchInput">
+    </div>
+    <div id="levels-list" class="levels-list"></div>
+</div>
 
-    <div id="home-screen" class="screen">
-        <div class="logo-large">RUOTA DELLA FORTUNA</div>
-        <div class="menu-box">
-            <h2>Scegli il Livello</h2>
-            <div class="level-buttons">
-                <button onclick="startGame(0)">LIVELLO 1: FACILE</button>
-                <button onclick="startGame(1)">LIVELLO 2: PROVERBIO</button>
-                <button onclick="startGame(2)">LIVELLO 3: CINEMA</button>
-            </div>
-        </div>
+
+    <div id="game-screen" class="screen hidden game-bg">
+    <div class="game-header">
+        <button class="back-btn" onclick="location.reload()">← MENU</button>
+        <button class="solve-btn" onclick="revealSolution()">SOLUZIONE</button>
     </div>
 
-    <div id="game-screen" class="screen hidden">
-        <div class="header-game">
-            <button class="back-btn" onclick="showHome()">← Menu</button>
-            <h2 id="categoryDisplay">CATEGORIA: ---</h2>
-        </div>
-
-        <div id="board" class="board">
-            <div class="row r1" id="row-1"></div>
-            <div class="row r2" id="row-2"></div>
-            <div class="row r3" id="row-3"></div>
-            <div class="row r4" id="row-4"></div>
-        </div>
-
-        <div id="keyboard" class="keyboard"></div>
+    <div class="board-main-wrapper">
+        <table class="wheel-table">
+            <tr id="row-1"></tr>
+            <tr id="row-2"></tr>
+            <tr id="row-3"></tr>
+            <tr id="row-4"></tr>
+        </table>
     </div>
+
+    <div id="categoryDisplay" class="category-tag">CATEGORIA</div>
+
+    <div id="keyboard" class="keyboard"></div>
+</div>
 
     <script src="script.js"></script>
 </body>
