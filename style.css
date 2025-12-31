@@ -65,19 +65,28 @@ body, html {
     background: #222; padding: 15px; border: 12px solid #555;
     border-radius: 20px; box-shadow: 0 0 50px rgba(0,0,0,0.5);
 }
+/* ... resto del codice identico ... */
 
 .tile {
     width: 65px; height: 95px; background-color: var(--tile-green);
     border-radius: 6px; text-align: center; vertical-align: middle;
     font-size: 50px; color: #000; font-weight: bold;
+    transition: background-color 0.3s; /* Effetto fluido al cambio colore */
 }
-
-.tile.offset-tile { visibility: hidden; }
 
 .tile.active { 
-    background: #004d29; /* Verde scuro quando c'è una lettera ma è chiusa */
+    background: white !important; /* Sempre bianca se contiene una lettera */
     border: 4px solid var(--neon-pink); 
+    color: transparent; /* Nasconde la lettera inizialmente */
 }
+
+.tile.revealed {
+    color: black !important; /* Mostra la lettera quando indovinata */
+    background: white !important;
+}
+
+/* ... resto del codice identico ... */
+
 
 .category-tag {
     margin: 20px auto; padding: 10px 40px; background: white;
